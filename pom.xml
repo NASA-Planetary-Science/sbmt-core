@@ -26,25 +26,14 @@
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
-  <repositories>
-    <repository>
-        <id>localrepository</id>
-        <url>file://${project.basedir}/lib</url>
-    </repository>
-  </repositories>
   <dependencies>
   	<dependency>
-   		<groupId>altwg</groupId>
+   		<groupId>edu.jhuapl.ses</groupId>
 	    <artifactId>altwg</artifactId>
-	    <version>1.0</version> 
+	    <version>1.0</version>  
 	</dependency>
 	<dependency>
-   		<groupId>jide</groupId>
-	    <artifactId>jide-oss</artifactId>
-	    <version>java11</version>
-	</dependency>
-	<dependency>
-   		<groupId>spice</groupId>
+   		<groupId>edu.jhuapl.ses</groupId>
 	    <artifactId>spice</artifactId>
 	    <version>N0065</version>
 	</dependency>
