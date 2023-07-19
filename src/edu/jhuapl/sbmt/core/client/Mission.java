@@ -1,5 +1,11 @@
 package edu.jhuapl.sbmt.core.client;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.JarURLConnection;
+import java.net.URL;
+import java.util.Date;
+
 import edu.jhuapl.saavtk.colormap.Colormaps;
 import edu.jhuapl.saavtk.util.Configuration;
 
@@ -50,6 +56,9 @@ public enum Mission
 
 	private static Mission mission = RELEASED_MISSION;
 	private static boolean missionConfigured = false;
+	
+	public static Date compileDate = null;
+	public static String versionString = "\n";
 
 	Mission(String hashedName, boolean publishedDataOnly)
 	{
@@ -118,6 +127,50 @@ public enum Mission
 
 		return mission;
 	}
+	
+	private static void generateCompileDateAndVersionString(Object sbmtClass) {
+
+
+		if (compileDate != null && !versionString.equals("\n")) return;
+        try
+        {
+        	Class<?> classToLoad = sbmtClass.getClass();
+        	ClassLoader classLoader = classToLoad.getClassLoader();
+        	String classNameToLoad = sbmtClass.getClass().getCanonicalName().replace('.', '/').substring(0, sbmtClass.getClass().getCanonicalName().length());
+        	URL classURL = classLoader.getResource(classNameToLoad + ".class");
+        	File file = new File(classURL.toURI());
+            compileDate = new Date(file.lastModified());
+        }
+        catch (@SuppressWarnings("unused") Exception e)
+        {
+            try {
+                String rn = sbmtClass.getClass().getName().replace('.', '/') + ".class";
+                JarURLConnection j = (JarURLConnection) ClassLoader.getSystemResource(rn).openConnection();
+                long time =  j.getJarFile().getEntry("META-INF/MANIFEST.MF").getTime();
+                compileDate = new Date(time);
+            } catch (@SuppressWarnings("unused") Exception e1) {
+            }
+        }
+
+        try
+        {
+            InputStream is = sbmtClass.getClass().getResourceAsStream("/edu/jhuapl/sbmt/data/release.version");
+            byte[] data = new byte[256];
+            is.read(data, 0, data.length);
+            versionString = new String(data).trim();
+        }
+        catch (Exception e)
+        {
+        	e.printStackTrace();
+	    	System.out.println("exception = " + e.toString());
+        }
+	}
+	
+	public static Mission configureMission(String rootUrl)
+	{
+		Configuration.setRootURL(rootUrl);
+		return configureMission();
+	}
 
 	public static Mission configureMission()
 	{
@@ -126,7 +179,7 @@ public enum Mission
 			return mission;
 		}
 		Mission mission = getMission();
-
+		generateCompileDateAndVersionString(mission);
 		switch (mission)
 		{
 		case APL_INTERNAL_NIGHTLY:
