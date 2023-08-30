@@ -71,6 +71,28 @@
 			</execution>
 		</executions>
 	  </plugin>
+	  <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-antrun-plugin</artifactId>
+		<version>3.1.0</version>
+		<executions>
+			<execution>
+				<?m2e execute onConfiguration?>
+				<phase>compile</phase>
+				<configuration>
+					<target>
+						<mkdir dir="${project.build.directory}/classes/edu/jhuapl/sbmt/data" />
+						<copy todir="${project.build.directory}/classes/edu/jhuapl/sbmt/data">
+							<fileset dir="src/edu/jhuapl/sbmt/data" />
+						</copy>
+					</target>
+				</configuration>
+				<goals>
+					<goal>run</goal>
+				</goals>
+			</execution>
+		</executions>
+	  </plugin>
     </plugins>
   </build>
 </project>
