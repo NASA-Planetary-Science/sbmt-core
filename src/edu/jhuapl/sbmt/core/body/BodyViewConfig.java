@@ -53,20 +53,12 @@ public abstract class BodyViewConfig extends ViewConfig
     public Mission[] presentInMissions;
     public Mission[] defaultForMissions;
 
-
-    //DTMs
-    public Map<String, String> dtmBrowseDataSourceMap = Maps.newHashMap();
-    public Map<String, String> dtmSearchDataSourceMap = Maps.newHashMap();
-
 	/**
 	 * Returns true if this configuration has any remote DTMs.
 	 */
 	public boolean hasRemoteDtmData()
 	{
-		if (dtmBrowseDataSourceMap == null || dtmBrowseDataSourceMap.size() == 0)
-			return false;
-
-		return true;
+		return hasDTMs;
 	}
 
     // Flag for beta mode
@@ -387,8 +379,6 @@ public abstract class BodyViewConfig extends ViewConfig
 		result = prime * result + ((dataUsed == null) ? 0 : dataUsed.hashCode());
 		result = prime * result + Arrays.hashCode(databaseRunInfos);
 		result = prime * result + Arrays.hashCode(defaultForMissions);
-		result = prime * result + ((dtmBrowseDataSourceMap == null) ? 0 : dtmBrowseDataSourceMap.hashCode());
-		result = prime * result + ((dtmSearchDataSourceMap == null) ? 0 : dtmSearchDataSourceMap.hashCode());
 		result = prime * result + (hasBigmap ? 1231 : 1237);
 		result = prime * result + (hasColoringData ? 1231 : 1237);
 		result = prime * result + (hasFlybyData ? 1231 : 1237);
@@ -455,27 +445,6 @@ public abstract class BodyViewConfig extends ViewConfig
 		if (Double.doubleToLongBits(density) != Double.doubleToLongBits(other.density))
 		{
 //			System.err.println("BodyViewConfig: equals: density doesn't match");
-			return false;
-		}
-		if (dtmBrowseDataSourceMap == null)
-		{
-			if (other.dtmBrowseDataSourceMap != null)
-			{
-//				System.out.println("BodyViewConfig: equals: dtm browse");
-				return false;
-			}
-		} else if (!dtmBrowseDataSourceMap.equals(other.dtmBrowseDataSourceMap))
-		{
-//			System.out.println("BodyViewConfig: equals: dtm browse ");
-			return false;
-		}
-		if (dtmSearchDataSourceMap == null)
-		{
-			if (other.dtmSearchDataSourceMap != null)
-				return false;
-		} else if (!dtmSearchDataSourceMap.equals(other.dtmSearchDataSourceMap))
-		{
-//			System.err.println("BodyViewConfig: equals: dtm search data source map " + dtmSearchDataSourceMap + " " + other.dtmSearchDataSourceMap);
 			return false;
 		}
 		if (hasBigmap != other.hasBigmap)
