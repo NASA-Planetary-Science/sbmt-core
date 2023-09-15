@@ -184,7 +184,6 @@ public abstract class BodyViewConfig extends ViewConfig
         c.dataUsed = this.dataUsed;
 
         c.hasMapmaker = this.hasMapmaker;
-        c.hasBigmap = this.hasBigmap;
         c.density = this.density;
         c.rotationRate = this.rotationRate;
 
@@ -379,7 +378,6 @@ public abstract class BodyViewConfig extends ViewConfig
 		result = prime * result + ((dataUsed == null) ? 0 : dataUsed.hashCode());
 		result = prime * result + Arrays.hashCode(databaseRunInfos);
 		result = prime * result + Arrays.hashCode(defaultForMissions);
-		result = prime * result + (hasBigmap ? 1231 : 1237);
 		result = prime * result + (hasColoringData ? 1231 : 1237);
 		result = prime * result + (hasFlybyData ? 1231 : 1237);
 		result = prime * result + (hasLineamentData ? 1231 : 1237);
@@ -445,11 +443,6 @@ public abstract class BodyViewConfig extends ViewConfig
 		if (Double.doubleToLongBits(density) != Double.doubleToLongBits(other.density))
 		{
 //			System.err.println("BodyViewConfig: equals: density doesn't match");
-			return false;
-		}
-		if (hasBigmap != other.hasBigmap)
-		{
-//			System.err.println("BodyViewConfig: equals: has big map " + hasBigmap + " " + other.hasBigmap);
 			return false;
 		}
 		if (hasColoringData != other.hasColoringData)
