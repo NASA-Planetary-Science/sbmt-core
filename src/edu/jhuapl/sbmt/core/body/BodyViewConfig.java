@@ -46,7 +46,6 @@ public abstract class BodyViewConfig extends ViewConfig
 
     protected final Map<Class<?>, List<IFeatureConfig>> featureConfigs = new HashMap<Class<?>, List<IFeatureConfig>>();
 
-    public boolean hasBigmap = false;
     public boolean hasLineamentData = false;
 
     //default configs
