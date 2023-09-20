@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.jhuapl.ses.srn.sbmt</groupId>
   <artifactId>sbmt-core</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
   <name>sbmt-core</name>
   <description>SBMT core classes</description>
   <packaging>jar</packaging>
@@ -50,6 +50,14 @@
   </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -71,13 +79,14 @@
 			</execution>
 		</executions>
 	  </plugin>
+	  <!--
 	  <plugin>
 		<groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-antrun-plugin</artifactId>
 		<version>3.1.0</version>
 		<executions>
 			<execution>
-				<?m2e execute onConfiguration?>
+				<?m2e execute onConfiguration,onIncremental?>
 				<phase>compile</phase>
 				<configuration>
 					<target>
@@ -93,6 +102,7 @@
 			</execution>
 		</executions>
 	  </plugin>
+	  -->
     </plugins>
   </build>
 </project>
