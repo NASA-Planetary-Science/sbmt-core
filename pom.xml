@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.jhuapl.ses.srn.sbmt</groupId>
   <artifactId>sbmt-core</artifactId>
-  <version>1.0.3-b0</version>
+  <version>1.0.3-b0-SNAPSHOT</version>
   <name>sbmt-core</name>
   <description>SBMT core classes</description>
   <packaging>jar</packaging>
@@ -11,17 +11,16 @@
 	<url>https://www.jhuapl.edu</url>
   </organization>
   <distributionManagement>
-	  <!--
   	<repository>
 		<id>central</id>
 		<name>surfshop-releases</name>
 		<url>http://surfshop.jhuapl.edu:8081/artifactory/libs-release-local</url>
-	</repository> -->
-	<repository>
+	</repository>
+	<snapshotRepository>
 		<id>central</id>
 		<name>surfshop-snapshots</name>
 		<url>http://surfshop.jhuapl.edu:8081/artifactory/libs-snapshot-local</url>
-	</repository>
+	</snapshotRepository>
   </distributionManagement>
   <properties>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -46,7 +45,7 @@
 	<dependency>
 		<groupId>edu.jhuapl.ses.srn.saavtk</groupId>
 		<artifactId>saavtk</artifactId>
-		<version>1.0.1-b0</version>
+		<version>1.0.1-b0-SNAPSHOT</version>
 	</dependency>
   </dependencies>
   <build>
