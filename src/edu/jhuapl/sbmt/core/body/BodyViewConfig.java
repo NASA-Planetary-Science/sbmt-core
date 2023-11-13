@@ -49,8 +49,8 @@ public abstract class BodyViewConfig extends ViewConfig
     public boolean hasLineamentData = false;
 
     //default configs
-    public Mission[] presentInMissions;
-    public Mission[] defaultForMissions;
+    public Mission[] presentInMissions = new Mission[] {};
+    public Mission[] defaultForMissions = new Mission[] {};
 
 	/**
 	 * Returns true if this configuration has any remote DTMs.
