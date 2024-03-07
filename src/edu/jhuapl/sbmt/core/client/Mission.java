@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.JarURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import edu.jhuapl.saavtk.colormap.Colormaps;
 import edu.jhuapl.saavtk.util.Configuration;
+import edu.jhuapl.saavtk.util.Configuration.ReleaseType;
 
 public enum Mission
 {
@@ -166,11 +168,39 @@ public enum Mission
         }
 	}
 	
-	public static Mission configureMission(String rootUrl)
-	{
-		Configuration.setRootURL(rootUrl);
-		return configureMission();
-	}
+//	public static Mission configureMission(String rootUrl)
+//	{
+//		String rootUrl = "https://sbmt.jhuapl.edu/sbmt/prod";
+//
+//        switch (mission)
+//        {
+//        case DART_DEPLOY:
+//            // TODO: set rootUrl when this is determined.
+//            break;
+//        case STAGE_APL_INTERNAL:
+//        case STAGE_PUBLIC_RELEASE:
+//        case DART_STAGE:
+//            rootUrl = "https://sbmt.jhuapl.edu/internal/multi-mission/stage";
+//            break;
+//        case TEST_APL_INTERNAL:
+//        case TEST_PUBLIC_RELEASE:
+//        case DART_TEST:
+//        case OSIRIS_REX_TEST:
+//            rootUrl = "http://sbmt-web.jhuapl.edu/internal/multi-mission/test";
+//            break;
+//        case HAYABUSA2_DEPLOY:
+//            rootUrl = "http://hyb2sbmt.u-aizu.ac.jp/sbmt";
+//            break;
+//        case OSIRIS_REX_DEPLOY:
+//            rootUrl = "https://uasbmt.lpl.arizona.edu/sbmt";
+//            break;
+//        default:
+//            break;
+//        }
+//		
+//		Configuration.setRootURL(rootUrl);
+//		return configureMission();
+//	}
 
 	public static Mission configureMission()
 	{
@@ -180,42 +210,79 @@ public enum Mission
 		}
 		Mission mission = getMission();
 		generateCompileDateAndVersionString(mission);
+		
+		String rootUrl = "https://sbmt.jhuapl.edu/sbmt/prod";
+		switch (mission)
+	    {
+        case DART_DEPLOY:
+            // TODO: set rootUrl when this is determined.
+            break;
+        case STAGE_APL_INTERNAL:
+        case STAGE_PUBLIC_RELEASE:
+        case DART_STAGE:
+            rootUrl = "https://sbmt.jhuapl.edu/internal/multi-mission/stage";
+            break;
+        case TEST_APL_INTERNAL:
+        case TEST_PUBLIC_RELEASE:
+        case DART_TEST:
+        case OSIRIS_REX_TEST:
+            rootUrl = "http://sbmt-web.jhuapl.edu/internal/multi-mission/test";
+            break;
+        case HAYABUSA2_DEPLOY:
+            rootUrl = "http://hyb2sbmt.u-aizu.ac.jp/sbmt";
+            break;
+        case OSIRIS_REX_DEPLOY:
+            rootUrl = "https://uasbmt.lpl.arizona.edu/sbmt";
+            break;
+        default:
+            break;
+        }
+		
+		Configuration.setRootURL(rootUrl);
+    		
 		switch (mission)
 		{
 		case APL_INTERNAL_NIGHTLY:
 			Configuration.setAppName("sbmt-internal-nightly");
 			Configuration.setCacheVersion("2");
 			Configuration.setAppTitle("SBMT");
+			Configuration.setReleaseType(ReleaseType.DEVELOPMENT);
 			break;
 		case APL_INTERNAL:
+			Configuration.setAppName("sbmt-apl");
+	        Configuration.setCacheVersion("2");
+	        Configuration.setAppTitle("SBMT");
+	        break;
 		case PUBLIC_RELEASE:
 			Configuration.setAppName("sbmt");
 			Configuration.setCacheVersion("2");
 			Configuration.setAppTitle("SBMT");
 			break;
 		case STAGE_APL_INTERNAL:
+			Configuration.setAppName("sbmt-stage-apl");
+            Configuration.setCacheVersion("2");
+            Configuration.setAppTitle("SBMT");
+            break;
 		case STAGE_PUBLIC_RELEASE:
 			Configuration.setAppName("sbmt-stage");
 			Configuration.setCacheVersion("2");
 			Configuration.setAppTitle("SBMT");
-			Configuration.setRootURL("http://sbmt.jhuapl.edu/internal/multi-mission/stage");
-
 			break;
 		case TEST_APL_INTERNAL:
+			Configuration.setAppName("sbmt-test-apl");
+            Configuration.setCacheVersion("2");
+            Configuration.setAppTitle("SBMT");
+            break;
 		case TEST_PUBLIC_RELEASE:
 			Configuration.setAppName("sbmt-test");
 			Configuration.setCacheVersion("2");
 			Configuration.setAppTitle("SBMT");
-			Configuration.setRootURL("http://sbmt-web.jhuapl.edu/internal/multi-mission/test");
-
 			break;
 		case HAYABUSA2_DEV:
-			// Configuration.setRootURL("http://sbmt.jhuapl.edu/internal/sbmt");
-			// Configuration.setRootURL("http://sbmt.jhuapl.edu/internal/multi-mission/test");
 			Configuration.setAppName("sbmthyb2-dev");
 			Configuration.setCacheVersion("");
+			Configuration.setReleaseType(ReleaseType.DEVELOPMENT);
 			Configuration.setAppTitle("SBMT/Hayabusa2-Dev");
-			// Configuration.setDatabaseSuffix("_test");
 			break;
 		// case HAYABUSA2_STAGE:
 		// Configuration.setRootURL("http://hyb2sbmt.jhuapl.edu/sbmt");
@@ -224,18 +291,22 @@ public enum Mission
 		// Configuration.setAppTitle("SBMT/Hayabusa2-Stage");
 		// break;
 		case HAYABUSA2_DEPLOY:
-			Configuration.setRootURL("http://hyb2sbmt.u-aizu.ac.jp/sbmt");
 			Configuration.setAppName("sbmthyb2");
 			Configuration.setCacheVersion("");
 			Configuration.setAppTitle("SBMT/Hayabusa2");
 			break;
 		case OSIRIS_REX:
-			// Configuration.setRootURL("http://sbmt.jhuapl.edu/internal/sbmt");
 			Configuration.setAppName("sbmt1orex-dev");
 			Configuration.setCacheVersion("");
 			Configuration.setAppTitle("SBMT/OSIRIS REx-Dev");
 			Colormaps.setDefaultColormapName("Spectral_lowBlue");
 			break;
+        case OSIRIS_REX_TEST:
+            Configuration.setAppName("sbmt1orex-test");
+            Configuration.setCacheVersion("");
+            Configuration.setAppTitle("SBMT/OSIRIS REx-Test" /*+ versionString + " (" + compileDateString + ")"*/);
+            Colormaps.setDefaultColormapName("Spectral_lowBlue");
+            break;
 		// case OSIRIS_REX_STAGE:
 		// Configuration.setRootURL("http://orexsbmt.jhuapl.edu/sbmt");
 		// Configuration.setAppName("sbmt1orex-stage");
@@ -250,7 +321,6 @@ public enum Mission
 			Colormaps.setDefaultColormapName("Spectral_lowBlue");
 			break;
 		case OSIRIS_REX_DEPLOY:
-			Configuration.setRootURL("https://uasbmt.lpl.arizona.edu/sbmt");
 			Configuration.setAppName("sbmt1orex");
 			Configuration.setCacheVersion("");
 			Configuration.setAppTitle("SBMT/OSIRIS REx");
@@ -261,11 +331,104 @@ public enum Mission
 			Configuration.setCacheVersion("");
 			Configuration.setAppTitle("SBMT/New Horizons");
 			break;
+		case DART_DEV:
+			Configuration.setAppName("sbmt1dart-dev");
+			Configuration.setCacheVersion("");
+			Configuration.setReleaseType(ReleaseType.DEVELOPMENT);
+			Configuration.setAppTitle("SBMT/DART (Development Version)" /*+ "(" + compileDateString + ")"*/);
+            Colormaps.setDefaultColormapName("Spectral_lowBlue");
+			break;
+		case DART_DEPLOY:
+			Configuration.setAppName("sbmt1dart");
+			Configuration.setCacheVersion("");
+			Configuration.setAppTitle("SBMT/DART" /*+ versionString + " (" + compileDateString + ")"*/);
+            Colormaps.setDefaultColormapName("Spectral_lowBlue");
+			break;
+        case DART_STAGE:
+            Configuration.setAppName("sbmt1dart-stage");
+            Configuration.setCacheVersion("");
+            Configuration.setReleaseType(ReleaseType.DEVELOPMENT);
+            Configuration.setAppTitle("SBMT/DART (Stage Version)" /*+ "(" + compileDateString + ")"*/);
+            Colormaps.setDefaultColormapName("Spectral_lowBlue");
+            break;
+        case DART_TEST:
+            Configuration.setAppName("sbmt1dart-test");
+            Configuration.setCacheVersion("");
+            Configuration.setReleaseType(ReleaseType.DEVELOPMENT);
+            Configuration.setAppTitle("SBMT/DART (Test Version)" /*+ "(" + compileDateString + ")"*/);
+            Colormaps.setDefaultColormapName("Spectral_lowBlue");
+            break;
+        case MEGANE_DEV:
+			Configuration.setAppName("sbmt1megane-dev");
+			Configuration.setCacheVersion("");
+			Configuration.setReleaseType(ReleaseType.DEVELOPMENT);
+			Configuration.setAppTitle("SBMT/MEGANE (Development Version)");
+            Colormaps.setDefaultColormapName("Spectral_lowBlue");
+			break;
+		case MEGANE_DEPLOY:
+			Configuration.setAppName("sbmt1megane");
+			Configuration.setCacheVersion("");
+			Configuration.setAppTitle("SBMT/MEGANE");
+            Colormaps.setDefaultColormapName("Spectral_lowBlue");
+			break;
+        case MEGANE_STAGE:
+            Configuration.setAppName("sbmt1megane-stage");
+            Configuration.setCacheVersion("");
+            Configuration.setReleaseType(ReleaseType.DEVELOPMENT);
+            Configuration.setAppTitle("SBMT/MEGANE (Stage Version)");
+            Colormaps.setDefaultColormapName("Spectral_lowBlue");
+            break;
+        case MEGANE_TEST:
+            Configuration.setAppName("sbmt1megane-test");
+            Configuration.setCacheVersion("");
+            Configuration.setReleaseType(ReleaseType.DEVELOPMENT);
+            Configuration.setAppTitle("SBMT/MEGANE (Test Version)" );
+            Colormaps.setDefaultColormapName("Spectral_lowBlue");
+            break;
 		default:
 			throw new AssertionError();
 		}
 		missionConfigured = true;
 		return mission;
+	}
+	
+	public static String getDisplaySplashName(Mission mission)
+	{
+		switch (mission)
+        {
+        case APL_INTERNAL_NIGHTLY:
+        case APL_INTERNAL:
+        case PUBLIC_RELEASE:
+        case STAGE_APL_INTERNAL:
+        case STAGE_PUBLIC_RELEASE:
+        case TEST_APL_INTERNAL:
+        case TEST_PUBLIC_RELEASE:
+        case NH_DEPLOY:
+        case DART_DEV:
+        case DART_DEPLOY:
+        case DART_STAGE:
+        case DART_TEST:
+        case MEGANE_DEV:
+        case MEGANE_DEPLOY:
+        case MEGANE_STAGE:
+        case MEGANE_TEST:
+            return "splashLogo.png";
+        case HAYABUSA2_DEV:
+            return "splashLogoHb2Dev.png";
+//        case HAYABUSA2_STAGE:
+//            splash = new SbmtSplash("resources", "splashLogoHb2Stage.png");
+//            break;
+        case HAYABUSA2_DEPLOY:
+            return "splashLogoHb2.png";
+        case OSIRIS_REX:
+        case OSIRIS_REX_TEST:
+        case OSIRIS_REX_DEPLOY:
+        case OSIRIS_REX_MIRROR_DEPLOY:
+//        case OSIRIS_REX_STAGE:
+            return "splashLogoOrex.png";
+        default:
+            throw new AssertionError("Unhandled splash screen case for launch configuration " + mission);
+        }
 	}
 
 	public String getLaunchImageFilename()
