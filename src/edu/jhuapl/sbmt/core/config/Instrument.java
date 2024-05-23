@@ -37,6 +37,7 @@ public enum Instrument
     ITS("ITS"),
     HRI("HRI"),
     MRI("MRI"),
+    LLORRI("LLORRI"),
     ;
 
     final private String str;
