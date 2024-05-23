@@ -36,7 +36,11 @@ public enum Mission
 	MEGANE_DEV("9da85292", false),
 	MEGANE_DEPLOY("9da85293", false),
 	MEGANE_TEST("8f549edc", false),
-	MEGANE_STAGE("afad11cb", false);
+	MEGANE_STAGE("afad11cb", false),
+    LUCY_DEPLOY("f004bc5d", false),
+    LUCY_TEST("3d4ff830", false),
+    LUCY_STAGE("77ffedc1", false),
+	;
 
 	private final String hashedName;
 	private String launchImageFilename;
@@ -220,12 +224,14 @@ public enum Mission
         case STAGE_APL_INTERNAL:
         case STAGE_PUBLIC_RELEASE:
         case DART_STAGE:
+        case LUCY_STAGE:
             rootUrl = "https://sbmt.jhuapl.edu/internal/multi-mission/stage";
             break;
         case TEST_APL_INTERNAL:
         case TEST_PUBLIC_RELEASE:
         case DART_TEST:
         case OSIRIS_REX_TEST:
+        case LUCY_TEST:
             rootUrl = "http://sbmt-web.jhuapl.edu/internal/multi-mission/test";
             break;
         case HAYABUSA2_DEPLOY:
@@ -385,6 +391,23 @@ public enum Mission
             Configuration.setAppTitle("SBMT/MEGANE (Test Version)" );
             Colormaps.setDefaultColormapName("Spectral_lowBlue");
             break;
+        case LUCY_DEPLOY:
+            Configuration.setAppName("sbmt1lucy");
+            Configuration.setCacheVersion("");
+            Configuration.setAppTitle("SBMT/LUCY");
+            break;
+        case LUCY_STAGE:
+            Configuration.setAppName("sbmt1lucy-stage");
+            Configuration.setCacheVersion("");
+            Configuration.setReleaseType(ReleaseType.DEVELOPMENT);
+            Configuration.setAppTitle("SBMT/LUCY (Stage Version)");
+            break;
+        case LUCY_TEST:
+            Configuration.setAppName("sbmt1lucy-test");
+            Configuration.setCacheVersion("");
+            Configuration.setReleaseType(ReleaseType.DEVELOPMENT);
+            Configuration.setAppTitle("SBMT/LUCY (Test Version)" );
+            break;
 		default:
 			throw new AssertionError();
 		}
@@ -412,6 +435,9 @@ public enum Mission
         case MEGANE_DEPLOY:
         case MEGANE_STAGE:
         case MEGANE_TEST:
+        case LUCY_DEPLOY:
+        case LUCY_STAGE:
+        case LUCY_TEST:
             return "splashLogo.png";
         case HAYABUSA2_DEV:
             return "splashLogoHb2Dev.png";
