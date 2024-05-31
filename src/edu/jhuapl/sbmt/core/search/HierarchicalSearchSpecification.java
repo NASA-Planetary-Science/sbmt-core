@@ -17,11 +17,11 @@ import javax.swing.tree.TreeSelectionModel;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 
-import edu.jhuapl.ses.jsqrl.api.Key;
-import edu.jhuapl.ses.jsqrl.api.Metadata;
-import edu.jhuapl.ses.jsqrl.api.MetadataManager;
-import edu.jhuapl.ses.jsqrl.api.Version;
-import edu.jhuapl.ses.jsqrl.impl.SettableMetadata;
+import crucible.crust.metadata.api.Key;
+import crucible.crust.metadata.api.Metadata;
+import crucible.crust.metadata.api.MetadataManager;
+import crucible.crust.metadata.api.Version;
+import crucible.crust.metadata.impl.SettableMetadata;
 
 public class HierarchicalSearchSpecification
 {
