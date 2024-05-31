@@ -48,6 +48,11 @@
  		<artifactId>jide-oss</artifactId>
  		<version>3.7.12</version>
 	</dependency>
+		<dependency>
+			<groupId>edu.jhuapl.ses.jsqrl</groupId>
+			<artifactId>jsqrl</artifactId>
+			<version>0.0.1</version> 
+		</dependency>
 	<dependency>
 		<groupId>edu.jhuapl.ses.srn.saavtk</groupId>
 		<artifactId>saavtk</artifactId>
