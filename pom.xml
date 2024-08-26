@@ -33,6 +33,11 @@
         <version>5.10.2</version>
         <scope>test</scope>
     </dependency>
+    <dependency>
+        <groupId>edu.jhuapl.ses</groupId>
+        <artifactId>altwg</artifactId>
+        <version>1.0</version>  
+    </dependency>
 	<dependency>
    		<groupId>edu.jhuapl.ses</groupId>
 	    <artifactId>spice</artifactId>
