@@ -2,8 +2,8 @@ package edu.jhuapl.sbmt.core.config;
 
 import java.util.HashMap;
 
-import crucible.crust.metadata.api.Key;
-import crucible.crust.metadata.api.Metadata;
+import edu.jhuapl.ses.jsqrl.api.Key;
+import edu.jhuapl.ses.jsqrl.api.Metadata;
 
 public class FeatureConfigIOFactory
 {
