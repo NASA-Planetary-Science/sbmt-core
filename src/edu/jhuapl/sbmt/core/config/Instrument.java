@@ -47,11 +47,14 @@ public final class Instrument
 
     private Instrument(String instrumentId)
     {
+        // Do not change the case of the field for the sake of the
+        // IMAGING_DATA constant, which is not all upper case.
         this.instrumentId = instrumentId;
         InstanceMap.put(instrumentId.toUpperCase(), this);
     }
 
-    public String name() {
+    public String name()
+    {
         return instrumentId;
     }
 
@@ -66,23 +69,23 @@ public final class Instrument
      * instance already exists, it is simply returned. Otherwise, an instance with the specified identifier is created and cached
      * for future reference. In no case does this method return null.
      * <p>
-     * Instrument instances are looked up in a case-insensitive way, i.e. "LLORRI" and "llorri" would be equivalent. The case of the
-     * instrument name is determined when the instrument instance is instantiated. For "built-in" instruments (see public static
-     * final fields above), the case of the identifier string is established prior to all calls to the {@link #valueFor(String)}
-     * method. For newer instruments that are not in the above list, the case of the identifier will be established the first time
-     * {@link #valueFor(String)} is called.
+     * The instance look-up is case insensitive. Moreover, this method converts its argument to upper case if it needs to create an
+     * instance.
      * 
-     * @param instrumentId
-     * @return
+     * 
+     * @param instrumentId instrument identifier string
+     * @return the instrument instance
      */
     public static Instrument valueFor(String instrumentId)
     {
-        Instrument instrument = InstanceMap.get(instrumentId.toUpperCase());
+        instrumentId = instrumentId.toUpperCase();
+        Instrument instrument = InstanceMap.get(instrumentId);
         if (instrument == null)
         {
             // This will add the instrument to the map.
             instrument = new Instrument(instrumentId);
         }
+
         return instrument;
     }
 }
