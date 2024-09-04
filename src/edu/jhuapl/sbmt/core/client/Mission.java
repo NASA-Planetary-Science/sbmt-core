@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.JarURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import edu.jhuapl.saavtk.colormap.Colormaps;
