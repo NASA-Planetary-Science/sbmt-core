@@ -47,7 +47,7 @@
         <url>https://github.com/NASA-Planetary-Science/sbmt-core/sbmt-core.git</url>
         <developerConnection>
             scm:git:https://github.com/NASA-Planetary-Science/sbmt-core/sbmt-core.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>HEAD</tag> 
     </scm>
 
     <distributionManagement>
