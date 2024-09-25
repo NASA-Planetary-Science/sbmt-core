@@ -124,7 +124,7 @@
             <artifactId>spice</artifactId>
         </dependency>
         <dependency>
-            <groupId>edu.jhuapl.ses.srn.saavtk</groupId>
+            <groupId>edu.jhuapl.ses.saavtk</groupId>
             <artifactId>saavtk</artifactId>
         </dependency>
     </dependencies>
