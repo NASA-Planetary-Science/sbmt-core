@@ -2,7 +2,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-<!--    <groupId>edu.jhuapl.ses.srn.sbmt</groupId>-->
     <artifactId>sbmt-core</artifactId>
     <version>1.0.0</version>
     <name>sbmt-core</name>
@@ -19,11 +18,11 @@
 
     <scm>
         <connection>
-            scm:git:https://github.com/NASA-Planetary-Science/sbmt-core/sbmt-core.git</connection>
+            scm:git:https://github.com/NASA-Planetary-Science/sbmt-core.git</connection>
         <url>
-            https://github.com/NASA-Planetary-Science/sbmt-core/sbmt-core.git</url>
+            https://github.com/NASA-Planetary-Science/sbmt-core.git</url>
         <developerConnection>
-            scm:git:https://github.com/NASA-Planetary-Science/sbmt-core/sbmt-core.git</developerConnection>
+            scm:git:https://github.com/NASA-Planetary-Science/sbmt-core.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -115,6 +114,10 @@
     </profiles>
 
     <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>edu.jhuapl.ses</groupId>
             <artifactId>altwg</artifactId>
