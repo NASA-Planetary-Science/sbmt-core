@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
-
 import edu.jhuapl.saavtk.config.ViewConfig;
 import edu.jhuapl.saavtk.model.ShapeModelBody;
 import edu.jhuapl.saavtk.model.ShapeModelType;
@@ -43,6 +41,13 @@ public abstract class BodyViewConfig extends ViewConfig
     public boolean hasRemoteMapmaker = false;
     public double bodyReferencePotential = 0.0;
     public String bodyLowestResModelName = "";
+    
+    public boolean hasFlybyData; // for flyby path data
+
+	public boolean useMinimumReferencePotential = false; // uses average otherwise
+	public boolean hasCustomBodyCubeSize = false;
+	// if hasCustomBodyCubeSize is true, the following must be filled in and valid
+	public double customBodyCubeSize; // km
 
     protected final Map<Class<?>, List<IFeatureConfig>> featureConfigs = new HashMap<Class<?>, List<IFeatureConfig>>();
 
@@ -362,6 +367,18 @@ public abstract class BodyViewConfig extends ViewConfig
 	{
 		return defaultForMissions;
 	}
+	
+	public boolean isHasCustomBodyCubeSize() {
+		return hasCustomBodyCubeSize;
+	}
+
+	public double getCustomBodyCubeSize() {
+		return customBodyCubeSize;
+	}
+
+	public boolean isUseMinimumReferencePotential() {
+		return useMinimumReferencePotential;
+	}
 
 	@Override
 	public int hashCode()
@@ -396,6 +413,10 @@ public abstract class BodyViewConfig extends ViewConfig
 		result = prime * result + Arrays.hashCode(shapeModelFileNames);
 		result = prime * result + ((timeHistoryFile == null) ? 0 : timeHistoryFile.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		temp = Double.doubleToLongBits(customBodyCubeSize);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + (hasCustomBodyCubeSize ? 1231 : 1237);
+		result = prime * result + (useMinimumReferencePotential ? 1231 : 1237);
 		return result;
 	}
 
@@ -492,6 +513,21 @@ public abstract class BodyViewConfig extends ViewConfig
 				return false;
 		} else if (!shapeModelFileBaseName.equals(other.shapeModelFileBaseName))
 		{
+			return false;
+		}
+		if (Double.doubleToLongBits(customBodyCubeSize) != Double.doubleToLongBits(other.customBodyCubeSize))
+		{
+//			System.out.println("ViewConfig: equals: custom body cube size don't match " + customBodyCubeSize + " " + other.customBodyCubeSize + " for " + other.author + "/" + other.body + " " + other.version);
+			return false;
+		}
+		if (hasCustomBodyCubeSize != other.hasCustomBodyCubeSize)
+		{
+//			System.out.println("ViewConfig: equals: has custom body cube size don't match");
+			return false;
+		}
+		if (useMinimumReferencePotential != other.useMinimumReferencePotential)
+		{
+//			System.out.println("ViewConfig: equals: use min ref potential don't match");
 			return false;
 		}
 		if (shapeModelFileExtension == null)

@@ -1,10 +1,8 @@
 package edu.jhuapl.sbmt.core.gui;
 
-import vtk.vtkImageReader2Factory;
+import edu.jhuapl.saavtk.util.NativeLibraryLoader;
 import vtk.vtkPolyData;
 import vtk.vtkSphereSource;
-
-import edu.jhuapl.saavtk.util.NativeLibraryLoader;
 
 public class PolyDataChunk extends vtkPolyData
 {
@@ -17,7 +15,7 @@ public class PolyDataChunk extends vtkPolyData
         vtkPolyData polyData=new vtkPolyData();
         polyData.DeepCopy(source.GetOutput());
 
-        vtkImageReader2Factory factory=new vtkImageReader2Factory();
+//        vtkImageReader2Factory factory=new vtkImageReader2Factory();
         //factory.CreateImageReader2(")
 
     }
